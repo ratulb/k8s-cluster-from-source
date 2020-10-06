@@ -6,7 +6,7 @@
 
 ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
 
-cat > encryption-config.yaml <<EOF
+cat > ../encryption/encryption-config.yaml <<EOF
 kind: EncryptionConfig
 apiVersion: v1
 resources:
@@ -24,7 +24,7 @@ echo "Generated encryption yaml."
 
 for instance in master-1 master-2 master-3; do
   lxc exec ${instance} -- mkdir -p /var/lib/kubernetes/
-  lxc file push encryption-config.yaml ${instance}/var/lib/kubernetes/
+  lxc file push ../encryption/encryption-config.yaml ${instance}/var/lib/kubernetes/
 done
 
 echo "Encryption yaml copied to master nodes."
