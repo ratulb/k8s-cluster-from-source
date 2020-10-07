@@ -2,7 +2,7 @@
 apt update 
 apt install build-essential -y
 
-DIST_DIR="../kube-binaries/"
+DIST_DIR="../../kube-binaries/"
 SRC_DIR="./kubernetes/"
 
 mkdir -p ${DIST_DIR}
