@@ -4,8 +4,10 @@
 #create necessary directories, copy certs and
 #create systemd service files and start the daemons
 
-. copy-kube-apiserver-binary.sh
+. distribute-kube-apiserver-binary.sh
 . distribute-master-certs.sh
-. gen-encryption-config-and-copy.sh
-. gen-and-copy-kube-apiserver-systemd-svc.sh
+. gen-admin-config.sh
+. distribute-admin-config-and-kubectl.sh
+. gen-encryption-config-and-distribute.sh
+. gen-and-distribute-kube-apiserver-systemd-svc.sh
 . start-api-servers.sh 
