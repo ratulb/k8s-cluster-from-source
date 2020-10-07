@@ -1,7 +1,7 @@
 */**/*.csr
 */**/*.json
 */**/*.bak
-*/**/*.pem
+certificates/*.pem
 kube-binaries/kube*
 bin/kubernetes/
 !kube-binaries/build.out
