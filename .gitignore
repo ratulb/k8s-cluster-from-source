@@ -1,9 +1,12 @@
 */**/*.csr
 */**/*.json
 */**/*.bak
+*/**/*.pem
 kube-binaries/kube*
 bin/kubernetes/
 !kube-binaries/build.out
+etcd/*.tar.gz
+kubernetes/
 etcd/etcd-download/*
 systemd/etcd/etcd-*
 
