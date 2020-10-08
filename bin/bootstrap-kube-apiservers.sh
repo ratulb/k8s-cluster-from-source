@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+. run-as-root.sh
 #Install the kube-apiserver binary in the master nodes
 #create necessary directories, copy certs and
 #create systemd service files and start the daemons

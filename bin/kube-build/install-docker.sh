@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
-echo "The user is : ${USER}"
+. ../run-as-root.sh
+
+systemctl daemon-reload
 
 if [ -x "$(command -v docker)" ]; then
     if [ "$(systemctl is-active docker)" = "inactive" ]; then
       echo "docker seems to be stopped. Trying to start docker"
-      systemctl start docker
+      systemctl restart docker
+    fi
+    if [ "$(systemctl is-active docker)" = "failed" ]; then
+      echo "docker seems to be failed. Trying to start docker"
+      systemctl restart docker
     fi
     if [ "$(systemctl is-active docker)" = "active" ]; then
           echo "Docker is running"

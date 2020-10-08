@@ -6,6 +6,8 @@ cd ../kube-binaries/
 chmod +x kube-apiserver
 
 for instance in master-1 master-2 master-3; do
+ lxc exec ${instance} -- systemctl daemon-reload
+ lxc exec ${instance} -- systemctl stop kube-apiserver
  lxc file push kube-apiserver  ${instance}/usr/local/bin/
  COPIED=$?
  if [ $COPIED -ne 0 ]; then

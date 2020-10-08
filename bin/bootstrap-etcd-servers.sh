@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+. run-as-root.sh
 #Download the etcd release tar file, extract the etcd & etcdctl binaries
 #Copy the binaries to etcd nodes
 #create necessary directories, copy certs and

@@ -13,6 +13,7 @@ wget -q --show-progress --https-only --timestamping ${DOWNLOAD_URL}/${ETCD_VER}/
 tar xzf ../etcd/etcd-${ETCD_VER}-linux-amd64.tar.gz -C ../etcd/etcd-download/ --strip-components=1 
 
 for instance in etcd-1 etcd-2 etcd-3; do
+ lxc exec ${instance} -- systemctl daemon-reload
  lxc exec ${instance} -- systemctl stop etcd
  lxc file push ../etcd/etcd-download/etcd ../etcd/etcd-download/etcdctl ${instance}/usr/local/bin/
  COPIED=$?
