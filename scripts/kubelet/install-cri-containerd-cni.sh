@@ -2,7 +2,6 @@
 . ../run-as-root.sh
 
 WORKERS=
-
 if [ $# -eq 0 ];
   then
     WORKERS="worker-1 worker-2 worker-3"
@@ -11,7 +10,6 @@ if [ $# -eq 0 ];
     WORKERS=$@
     echo "Setting up for $WORKERS"
 fi
-
 
 VERSION=1.3.4
 for instance in $WORKERS; do
@@ -28,12 +26,10 @@ for instance in $WORKERS; do
  lxc exec ${instance} -- sed -i 's/ExecStartPre=\/sbin\/modprobe\ overlay/#ExecStartPre=\/sbin\/modprobe\ overlay/' /etc/systemd/system/containerd.service
 done
 for instance in $WORKERS; do
-
   lxc exec ${instance} -- systemctl daemon-reload
   lxc exec ${instance} -- systemctl stop containerd
   lxc exec ${instance} -- systemctl enable containerd
   lxc exec ${instance} -- systemctl start containerd
    echo "Restarted containerd"
 done 
-
 printf "\nInstalled cri-containerd-cni\n"
