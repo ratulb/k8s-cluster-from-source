@@ -25,7 +25,7 @@ mkdir -p ${GENERATED_DIR}
 
 cat <<EOF | tee ${GENERATED_DIR}/99-loopback.conf
 {
-    "cniVersion": "0.4.0",
+    "cniVersion": "0.3.1",
     "name": "lo",
     "type": "loopback"
 }
@@ -41,7 +41,7 @@ POD_CIDR=${SEED_CIDR}.${COUNTER}.0/24
 
 cat <<EOF | tee ${GENERATED_DIR}/10-bridge.conf
 {
-    "cniVersion": "0.4.0",
+    "cniVersion": "0.3.1",
     "name": "bridge",
     "type": "bridge",
     "bridge": "cnio0",
