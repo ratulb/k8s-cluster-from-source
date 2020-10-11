@@ -4,8 +4,15 @@
 {
 cd ../kube-binaries/
 chmod +x kube-apiserver
-
-for instance in master-1 master-2 master-3; do
+MASTERS=
+if [ $# -eq 0 ];
+  then
+    MASTERS="master-1 master-2 master-3"
+  else
+    MASTERS=$@
+fi
+echo "Setting up $MASTERS"
+for instance in $MASTERS; do
  lxc exec ${instance} -- systemctl daemon-reload
  lxc exec ${instance} -- systemctl stop kube-apiserver
  lxc file push kube-apiserver  ${instance}/usr/local/bin/
@@ -16,8 +23,6 @@ for instance in master-1 master-2 master-3; do
     echo "Copied kube-apiserver to ${instance}"
  fi
 done
-
 cd -
-
 }
 
