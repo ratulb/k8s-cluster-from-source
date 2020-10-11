@@ -7,7 +7,6 @@ chmod +x ${KUBE_BINARIES_DIR}/kubelet
 . ../run-as-root.sh
 
 WORKERS=
-
 if [ $# -eq 0 ];
   then
     WORKERS="worker-1 worker-2 worker-3"
