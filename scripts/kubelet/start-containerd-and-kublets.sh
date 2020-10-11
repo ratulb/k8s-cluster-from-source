@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
-
 #Reload daemons and restart  kubelet service
-
 . ../run-as-root.sh
-
 WORKERS=
-
 if [ $# -eq 0 ];
   then
     WORKERS="worker-1 worker-2 worker-3"
@@ -17,7 +13,6 @@ fi
 
 for instance in $WORKERS; do
   lxc exec ${instance} -- systemctl daemon-reload
-
   lxc exec ${instance} -- systemctl stop containerd
   lxc exec ${instance} -- systemctl enable containerd
   lxc exec ${instance} -- systemctl start containerd
