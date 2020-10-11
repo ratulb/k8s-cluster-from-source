@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
 . ../run-as-root.sh
-
 WORKERS=
 if [ $# -eq 0 ];
   then
