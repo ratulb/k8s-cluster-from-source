@@ -9,11 +9,10 @@ WORKERS=
 if [ $# -eq 0 ];
   then
     WORKERS="worker-1 worker-2 worker-3"
-    echo "No arguments supplied - lxd configuration for $WORKERS"
   else
     WORKERS=$@
-    echo "lxd configuration for $WORKERS"
 fi
+echo "lxd configuration for $WORKERS"
 
 for instance in $WORKERS; do
   lxc config set ${instance} linux.kernel_modules "ip_tables,ip6_tables,netlink_diag,nf_nat,overlay"
