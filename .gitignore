@@ -1,13 +1,12 @@
 */**/*.csr
 */**/*.json
 */**/*.bak
-bin/kube-build/kubernetes/
-certificates/*.pem
-kube-binaries/kube*
-bin/kubernetes/
-!kube-binaries/build.out
-etcd/*.tar.gz
+scripts/kube-build/kubernetes/
+scripts/kubelet/generated
+scripts/etcd/generated
+kube-binaries/
+certificates/generated/
+etcd/
 kubernetes/
-etcd/etcd-download/*
-systemd/etcd/etcd-*
+systemd/
 
