@@ -16,7 +16,6 @@ if [ $# -eq 0 ];
     WORKERS=$@
     echo "Setting up for $WORKERS"
 fi
-
 for instance in $WORKERS; do
  lxc file push  ${KUBE_BINARIES_DIR}/kubelet  ${instance}/usr/local/bin/
  COPIED=$?
@@ -26,7 +25,5 @@ for instance in $WORKERS; do
     echo "Copied kubelet binary to ${instance}"
  fi
 done
-
-
 }
 
