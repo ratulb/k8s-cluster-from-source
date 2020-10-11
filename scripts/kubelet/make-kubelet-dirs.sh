@@ -5,14 +5,11 @@ WORKERS=
 if [ $# -eq 0 ];
   then
     WORKERS="worker-1 worker-2 worker-3"
-    echo "No arguments supplied - setting up for $WORKERS"
   else
     WORKERS=$@
-    echo "Setting up for $WORKERS"
 fi
-
+echo "Setting up for $WORKERS"
 GENERATED_DIR=./generated/etc/tmpfiles.d
-
 mkdir -p ${GENERATED_DIR}
 
 cat <<EOF | tee ${GENERATED_DIR}/kmsg.conf
