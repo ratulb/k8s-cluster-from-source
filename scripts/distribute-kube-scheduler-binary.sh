@@ -4,8 +4,15 @@
 {
 cd ../kube-binaries/
 chmod +x kube-scheduler
-
-for instance in master-1 master-2 master-3; do
+MASTERS=
+if [ $# -eq 0 ];
+  then
+    MASTERS="master-1 master-2 master-3"
+  else
+    MASTERS=$@
+fi
+echo "Setting up $MASTERS"
+for instance in $MASTERS; do
  lxc file push kube-scheduler  ${instance}/usr/local/bin/
  COPIED=$?
  if [ $COPIED -ne 0 ]; then
@@ -14,8 +21,6 @@ for instance in master-1 master-2 master-3; do
     echo "Copied kube-scheduler binary to ${instance}"
  fi
 done
-
 cd -
-
 }
 
