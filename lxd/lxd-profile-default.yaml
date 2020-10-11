@@ -11,12 +11,3 @@ devices:
     type: disk
 name: default
 used_by:
-- /1.0/instances/loadbalancer
-- /1.0/instances/etcd-1
-- /1.0/instances/etcd-2
-- /1.0/instances/worker-1
-- /1.0/instances/master-1
-- /1.0/instances/worker-2
-- /1.0/instances/worker-3
-- /1.0/instances/master-2
-- /1.0/instances/master-3
