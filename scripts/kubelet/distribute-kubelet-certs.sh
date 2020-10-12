@@ -4,17 +4,15 @@
 #Create required directories if needed
 
 GEN_CERTS_PATH=../../certificates/generated
-
 . ../run-as-root.sh
 WORKERS=
 if [ $# -eq 0 ];
   then
     WORKERS="worker-1 worker-2 worker-3"
-    echo "No arguments supplied - copying certs for $WORKERS"
   else
     WORKERS=$@
-    echo "Copying certs for $WORKERS"
 fi
+echo "Copying certs for $WORKERS"
 
 for instance in $WORKERS; do
   lxc exec ${instance} -- mkdir -p /var/lib/kubelet/
