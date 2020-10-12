@@ -1,21 +1,16 @@
 #!/usr/bin/env bash
 
 #Generate and copy the kubelet yaml onfiguration to worker nodes
-
 {
-
 . ../run-as-root.sh
 WORKERS=
 if [ $# -eq 0 ];
-#!/usr/bin/env bash
   then
-#!/usr/bin/env bash
     WORKERS="worker-1 worker-2 worker-3"
-    echo "No arguments supplied - setting up for $WORKERS"
   else
     WORKERS=$@
-    echo "Setting up for $WORKERS"
 fi
+echo "Setting up for $WORKERS"
 
 GENERATED_DIR=./generated/etc/containerd
 mkdir -p ${GENERATED_DIR}
@@ -39,20 +34,15 @@ Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-tim
 EOF
 
 for instance in $WORKERS; do
-
 #Push the generated file to the current worker node
+ lxc exec ${instance} -- mkdir -p /etc/containerd/
+ lxc file push ${GENERATED_DIR}/config.toml ${instance}/etc/containerd/
+ echo "Container config.toml  configuration copied to ${instance}"
 
-lxc exec ${instance} -- mkdir -p /etc/containerd/
-lxc file push ${GENERATED_DIR}/config.toml ${instance}/etc/containerd/
+ lxc exec ${instance} -- mkdir -p /etc/systemd/system/kubelet.service.d/
+ lxc file push ${GENERATED_FOR_KUBELET_CONF}/0-containerd.conf ${instance}/etc/systemd/system/kubelet.service.d/
 
-echo "Container config.toml  configuration copied to ${instance}"
-
-lxc exec ${instance} -- mkdir -p /etc/systemd/system/kubelet.service.d/
-lxc file push ${GENERATED_FOR_KUBELET_CONF}/0-containerd.conf ${instance}/etc/systemd/system/kubelet.service.d/
-
-echo "Kubelet 0-container.conf pushed to /etc/systemd/system/kubelet.service.d/ in ${instance}"
-
-done
-
+ echo "Kubelet 0-container.conf pushed to /etc/systemd/system/kubelet.service.d/ in ${instance}"
+ done
 }
 
