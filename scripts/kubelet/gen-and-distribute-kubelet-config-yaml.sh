@@ -1,24 +1,18 @@
 #!/usr/bin/env bash
 
 #Generate and copy the kubelet yaml onfiguration to worker nodes
-
 {
-
 . ../run-as-root.sh
 WORKERS=
 if [ $# -eq 0 ];
-#!/usr/bin/env bash
   then
-#!/usr/bin/env bash
     WORKERS="worker-1 worker-2 worker-3"
-    echo "No arguments supplied - setting up for $WORKERS"
   else
     WORKERS=$@
-    echo "Setting up for $WORKERS"
 fi
+echo "Setting up for $WORKERS"
 
 GENERATED_DIR=./generated/var/lib/kubelet/
-
 mkdir -p ${GENERATED_DIR}
 
 SEED_CIDR=10.200
@@ -49,18 +43,12 @@ tlsCertFile: "/var/lib/kubelet/${instance}.pem"
 tlsPrivateKeyFile: "/var/lib/kubelet/${instance}-key.pem"
 EOF
 
-
 ((COUNTER++))
 
-#Push the generated file to the current worker node
-
 cp ${GENERATED_DIR}/kubelet-config.yaml ${GENERATED_DIR}/kubelet-config.yaml.${instance}
-
+#Push the generated file to the current worker node
 lxc file push ${GENERATED_DIR}/kubelet-config.yaml ${instance}/var/lib/kubelet/
-
 echo "Kubelet yaml configuration copied to ${instance}"
-
 done
-
 }
 
