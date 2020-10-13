@@ -5,11 +5,10 @@ ETCD_SERVERS=
 if [ $# -eq 0 ];
   then
     ETCD_SERVERS="etcd-1 etcd-2 etcd-3"
-    echo "No arguments supplied - copying certs for $ETCD_SERVERS"
   else
     ETCD_SERVERS=$@
-    echo "Copying certs for $ETCD_SERVERS"
-fi
+ fi
+echo "Settong up for $ETCD_SERVERS"
 
 for instance in $ETCD_SERVERS; do
   lxc exec ${instance} -- rm -rf /var/lib/etcd
