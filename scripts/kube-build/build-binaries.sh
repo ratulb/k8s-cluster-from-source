@@ -11,7 +11,7 @@ mkdir -p ${DIST_DIR}
 
 if [ ! -d "${SRC_DIR}" ]; then
  printf "Cloning kubernetes source repository...\n"
- git clone https://github.com/kubernetes/kubernetes.git
+ git clone https://github.com/kubernetes/kubernetes.git --depth 1
 else 
  cd ${SRC_DIR}
  printf "Pulling kubernetes latest sources...\n"
