@@ -15,7 +15,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx-with-ping
+      - name: nginx-with-ping # ping and curl
         image: ratulb/nginx:with-ping
         ports:
         - containerPort: 80
