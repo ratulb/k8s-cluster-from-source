@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: my-nfs-storage-class
+  storageClassName: nfs-storage-class
   mountOptions:
     - hard
     - nfsvers=4.2
