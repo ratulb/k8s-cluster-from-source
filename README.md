@@ -1,4 +1,4 @@
-# kubernetes-cluster-ground-up-from-source
+# kubernetes cluster on lxd containers from latest sources
 Set up a kubernetes cluster from latest sources in lxd containers step by step.
 
 This repository is for those who really want to get their hands dirty with kubernetes. It sets up a k8s cluster ground up from latest kubernetes github source codes - it pulls down the latest code - generates the kube binaries (kubeadm is also built but - we set up the cluster without using kubeadm). 
