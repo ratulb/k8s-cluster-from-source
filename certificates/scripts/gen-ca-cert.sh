@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Generate certificate authority
-
 {
 cat > ca-config.json <<EOF
 {
@@ -18,7 +17,6 @@ cat > ca-config.json <<EOF
   }
 }
 EOF
-
 cat > ca-csr.json <<EOF
 {
   "CN": "Kubernetes",
@@ -37,7 +35,5 @@ cat > ca-csr.json <<EOF
   ]
 }
 EOF
-
 cfssl gencert -initca ca-csr.json | cfssljson -bare ca
-
 }
