@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
 # Generate certificate authority
+
+GENERATED_DIR=../generated
+mkdir -p ${GENERATED_DIR}
+
 {
-cat > ca-config.json <<EOF
+cat > ${GENERATED_DIR}/ca-config.json <<EOF
 {
   "signing": {
     "default": {
@@ -17,7 +21,7 @@ cat > ca-config.json <<EOF
   }
 }
 EOF
-cat > ca-csr.json <<EOF
+cat > ${GENERATED_DIR}/ca-csr.json <<EOF
 {
   "CN": "Kubernetes",
   "key": {
@@ -26,14 +30,14 @@ cat > ca-csr.json <<EOF
   },
   "names": [
     {
-      "C": "US",
-      "L": "Portland",
+      "C": "IN",
+      "L": "BLR",
       "O": "Kubernetes",
-      "OU": "CA",
-      "ST": "Oregon"
+      "OU": "KA",
+      "ST": "Karnataka"
     }
   ]
 }
 EOF
-cfssl gencert -initca ca-csr.json | cfssljson -bare ca
+cfssl gencert -initca ${GENERATED_DIR}/ca-csr.json | cfssljson -bare ${GENERATED_DIR}/ca
 }

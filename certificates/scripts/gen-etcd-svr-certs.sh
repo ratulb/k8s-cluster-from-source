@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-#Generates the certicates for the kubelets deployed on the worker nodes
+#Generates the certicates for etcd servers
 ETCD_SERVERS=
 if [ $# -eq 0 ];
   then
-    ETCD_SERVERS="etcd-1 etcd-2 etcd-3"
+    ETCD_SERVERS="etcd-server"
     echo "No arguments supplied - copying certs for $ETCD_SERVERS"
   else
     ETCD_SERVERS=$@
-    echo "Copying certs for $ETCD_SERVERS"
+    echo "Creating certs for $ETCD_SERVERS"
 fi
 
 GENERATED_DIR=../generated
@@ -18,24 +18,24 @@ for instance in $ETCD_SERVERS; do
 
 cat > ${GENERATED_DIR}/${instance}-csr.json <<EOF
 {
-  "CN": "system:node:${instance}",
+  "CN": "${instance}",
   "key": {
     "algo": "rsa",
     "size": 2048
   },
   "names": [
     {
-      "C": "US",
-      "L": "Portland",
-      "O": "system:nodes",
-      "OU": "kubernetes-cluster-ground-up-from-sources",
-      "ST": "Oregon"
+      "C": "IN",
+      "L": "BLR",
+      "O": "etcd-server",
+      "OU": "k8s-cluster-from-source",
+      "ST": "karnataka"
     }
   ]
 }
 EOF
 
-INSTANCE_IP=$(lxc list | grep ${instance} | awk '{print $6}')
+INSTANCE_IP=$instance
 
 cfssl gencert \
   -ca=${GENERATED_DIR}/ca.pem \

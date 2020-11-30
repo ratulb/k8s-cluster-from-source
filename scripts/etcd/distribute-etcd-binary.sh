@@ -3,7 +3,7 @@
 #Get latest etcd binaries,  copy them to /usr/bin/local @etcd nodes etcd-1, etcd-2 & etcd-3
 
 {
-ETCD_VER=v3.4.13
+ETCD_VER=v3.4.14
 ETCD_URL=https://github.com/etcd-io/etcd/releases/download
 DOWNLOAD_URL=${ETCD_URL}
 ETCD_DOWNLOAD_DIR=./download
