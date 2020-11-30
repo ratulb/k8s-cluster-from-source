@@ -1,7 +1,5 @@
 #The CA
-
 {
-
 cat > ca-config.json <<EOF
 {
   "signing": {
@@ -38,14 +36,10 @@ cat > ca-csr.json <<EOF
 EOF
 
 cfssl gencert -initca ca-csr.json | cfssljson -bare ca
-
 }
 
-
 #The admin cert
-
 {
-
 cat > admin-csr.json <<EOF
 {
   "CN": "admin",
@@ -74,9 +68,7 @@ cfssl gencert \
 
 }
 
-
 #Kubelets/workers
-
 for instance in worker-1 worker-2 worker-3; do
 cat > ${instance}-csr.json <<EOF
 {
@@ -98,7 +90,6 @@ cat > ${instance}-csr.json <<EOF
 EOF
 
 EXTERNAL_IP=$(lxc list | grep loadbalancer | awk '{print $6}')
-
 INTERNAL_IP=$(lxc list | grep ${instance} | awk '{print $6}')
 
 cfssl gencert \
@@ -110,12 +101,8 @@ cfssl gencert \
   ${instance}-csr.json | cfssljson -bare ${instance}
 done
 
-
 #kube-controller-manager
-
-
 {
-
 cat > kube-controller-manager-csr.json <<EOF
 {
   "CN": "system:kube-controller-manager",
@@ -144,12 +131,8 @@ cfssl gencert \
 
 }
 
-
-
 #kube-proxy
-
 {
-
 cat > kube-proxy-csr.json <<EOF
 {
   "CN": "system:kube-proxy",
@@ -175,13 +158,10 @@ cfssl gencert \
   -config=ca-config.json \
   -profile=kubernetes \
   kube-proxy-csr.json | cfssljson -bare kube-proxy
-
 }
 
 #kube-scheduler
-
 {
-
 cat > kube-scheduler-csr.json <<EOF
 {
   "CN": "system:kube-scheduler",
@@ -210,10 +190,7 @@ cfssl gencert \
 
 }
 
-
-
 #kube-apiserver
-
 {
 
 KUBERNETES_PUBLIC_ADDRESS=$(lxc list | grep loadbalancer | awk '{print $6}')
@@ -256,7 +233,6 @@ cfssl gencert \
 
 
 #Service account
-
 {
 
 cat > service-account-csr.json <<EOF
