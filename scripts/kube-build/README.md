@@ -4,3 +4,5 @@ Cluster setup is step by step - hands-on process - via simple intuitive scripts.
 
 Docker is needed for building kubernetes. If it is in-activated, activated or else docker gets installed.
 
+#### Steps to build kubernetes artifacts:
+- Run `./build-binaries.sh`.
