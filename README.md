@@ -1,6 +1,6 @@
 # Kubernetes Cluster on LXD from Latest Sources
 
-Build a multi-node, production-adjacent Kubernetes cluster **from source code** and run it on LXD containers — all without kubeadm, kubelet bootstrap, or any installer tooling.
+Build a multi-node, Kubernetes cluster **from source code** and run it on LXD containers — all without kubeadm, kubelet bootstrap, or any installer tooling.
 
 ## Motivation
 
